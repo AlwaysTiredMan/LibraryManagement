@@ -88,7 +88,11 @@ public class LibraryManager {
      * @return 삭제 성공 여부
      */
     public boolean deleteBook(int id) {
-        return bookMap.remove(id) != null;
+        Book removed = bookMap.remove(id);
+        if (removed != null) {
+            return repository.deleteBook(id);
+        }
+        return false;
     }
 
     /**
