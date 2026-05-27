@@ -51,10 +51,20 @@ public class LibraryMain {
             System.out.println("\n========= CSV 로그인 시스템 =========");
             System.out.print("아이디: ");
             String id = sc.nextLine();
+
+            // 아이디 첫 글자 숫자 검사
+            if (!id.isEmpty() && Character.isDigit(id.charAt(0))) {
+                System.out.println("[오류] 아이디의 첫 글자는 숫자가 될 수 없습니다. 다시 입력하세요.");
+                continue;
+            }
+
             System.out.print("비밀번호: ");
             String pw = sc.nextLine();
 
-            if (manager.login(id, pw)) return true;
+            if (manager.login(id, pw)) {
+                return true;
+            }
+
             System.out.println("[오류] 아이디 또는 비밀번호가 틀렸습니다.");
         }
     }
