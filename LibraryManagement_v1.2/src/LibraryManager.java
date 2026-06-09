@@ -124,15 +124,19 @@ public class LibraryManager {
      */
     public boolean returnBook(int id) {
         if (!bookMap.containsKey(id))
-            return false;
+        return false;
 
         Book book = bookMap.get(id);
-        if (!book.isAvailable()) {
-            book.setAvailable(true);
-            book.setBorrowerId("null");
-            return true;
-        }
-        return false;
+
+        if (book.isAvailable())
+            return false;
+
+        if (currentUser == null || !currentUser.getUserId().equals(book.getBorrowerId()))
+            return false;
+
+        book.setAvailable(true);
+        book.setBorrowerId("null");
+        return true;
     }
 
     /**
@@ -175,6 +179,7 @@ public class LibraryManager {
         try {
             // [수정] cmd.exe /c 를 앞에 붙여서 쉘이 명령어를 해석하게 만듭니다.
             String command = "cmd.exe /c ping -n 1 " + ip;
+            
 
             System.out.println("[시스템 실행 명령어]: " + command);
 
