@@ -27,9 +27,11 @@ public class LibraryMain {
             if (user.isAdmin()) showAdminMenu();
             else showUserMenu();
 
-            System.out.print("  명령 입력: ");
-            int choice = sc.nextInt();
-            sc.nextLine();
+            Integer choice = readInt("  명령 입력: ");
+
+            if (choice == null) {
+                continue;
+            }
 
             if (choice == 0) {
                 handleExit();
@@ -170,14 +172,10 @@ public class LibraryMain {
 
     private static void editOrDeleteUI() {
         System.out.println("\n[도서 수정 및 삭제]");
-        System.out.print("- 관리할 도서 ID 입력: ");
-        if (!sc.hasNextInt()) {
-            System.out.println("[오류] 숫자만 입력 가능합니다.");
-            sc.nextLine();
+        Integer id = readInt("- 관리할 도서 ID 입력: ");
+        if (id == null) {
             return;
         }
-        int id = sc.nextInt();
-        sc.nextLine();
 
         // Manager를 통해 도서 존재 확인
         Book book = manager.getBookMap().get(id);
@@ -191,9 +189,10 @@ public class LibraryMain {
                 book.getTitle(), book.getAuthor(), book.isAvailable() ? "비치중" : "대출중");
         System.out.println("  1. 제목 수정  2. 저자 수정  3. 도서 삭제  0. 취소");
         System.out.println("-----------------------------------------------------------");
-        System.out.print("  선택: ");
-        int choice = sc.nextInt();
-        sc.nextLine();
+        Integer choice = readInt("  선택: ");
+        if (choice == null) {
+            return;
+        }
 
         switch (choice) {
             case 1 -> {
@@ -233,9 +232,10 @@ public class LibraryMain {
      * @see LibraryManager#borrowBook(int)
      */
     private static void borrowBookUI() {
-        System.out.print("- 대출할 도서 ID 입력: ");
-        int id = sc.nextInt();
-        sc.nextLine();
+        Integer id = readInt("- 대출할 도서 ID 입력: ");
+        if (id == null) {
+            return;
+        }
 
         if (manager.borrowBook(id)) {
             System.out.println("[결과] 대출이 완료되었습니다.");
@@ -252,9 +252,10 @@ public class LibraryMain {
      * @see LibraryManager#returnBook(int)
      */
     private static void returnBookUI() {
-        System.out.print("- 반납할 도서 ID 입력: ");
-        int id = sc.nextInt();
-        sc.nextLine();
+        Integer id = readInt("- 반납할 도서 ID 입력: ");
+        if (id == null) {
+            return;
+        }
 
         if (manager.returnBook(id)) {
             System.out.println("[결과] 반납이 완료되었습니다.");
@@ -345,4 +346,19 @@ public class LibraryMain {
         // Manager에게 명령어 실행을 맡김
         manager.checkServerStatus(ip);
     }
+
+    private static Integer readInt(String prompt) {
+        System.out.print(prompt);
+
+        if (!sc.hasNextInt()) {
+            System.out.println("[오류] 숫자만 입력 가능합니다.");
+            sc.nextLine();
+            return null;
+        }
+
+        int value = sc.nextInt();
+        sc.nextLine();
+        return value;
+    }
+
 }
