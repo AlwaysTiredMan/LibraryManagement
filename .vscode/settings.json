@@ -1,0 +1,17 @@
+{
+    "java.project.sourcePaths": [
+        "LibraryManagement_v1.2/src",
+        "LibraryManagement_v1.2/test"
+    ],
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "LibraryManagement_v1.2/lib/mariadb-java-client-3.5.7.jar",
+        "/Users/chj/.m2/repository/org/junit/jupiter/junit-jupiter/5.8.1/junit-jupiter-5.8.1.jar",
+        "/Users/chj/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.8.1/junit-jupiter-api-5.8.1.jar",
+        "/Users/chj/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.8.1/junit-jupiter-engine-5.8.1.jar",
+        "/Users/chj/.m2/repository/org/junit/platform/junit-platform-commons/1.8.1/junit-platform-commons-1.8.1.jar",
+        "/Users/chj/.m2/repository/org/junit/platform/junit-platform-engine/1.8.1/junit-platform-engine-1.8.1.jar",
+        "/Users/chj/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar",
+        "/Users/chj/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar"
+    ]
+}
